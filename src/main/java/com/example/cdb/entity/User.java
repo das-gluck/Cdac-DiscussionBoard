@@ -10,9 +10,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -37,13 +38,13 @@ public class User implements UserDetails{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long user_id;
-		
+	
 	@Column(name="first_name" , nullable = false, length=20)
 	private String firstName;
 	
 	@Column(name="last_name" , nullable = false, length=20)
 	private String lastName;
-		
+	
 	@Column(name="mobile_number" , nullable = false, length=20)
 	private String mobileNumber;
 	
@@ -54,10 +55,12 @@ public class User implements UserDetails{
 	@Column(nullable = false)
 	@Getter(value = AccessLevel.NONE)
     private String password;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@JsonManagedReference
+	private List<Role> roleList = new ArrayList<>();
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@Column(name= "roles")
-	private List<String> roleList = new ArrayList<String>(); 
+	
 	
 	
 	// list of roles[USER,ADMIN]
@@ -65,9 +68,10 @@ public class User implements UserDetails{
 	// collection of simpleGrantedAuthority[roles{ADMIN,USER}]
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Collection<SimpleGrantedAuthority> roles =  roleList.stream().map(role-> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
+		Collection<SimpleGrantedAuthority> roles =  roleList.stream().map(role-> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toList());
 		return roles;
 	}
+
 	
 	//Returns the username used to authenticate the user.
 	@Override
@@ -75,19 +79,24 @@ public class User implements UserDetails{
 		return this.email;
 	}
 
+	
 	// Returns the password used to authenticate the user.
 	@Override
 	public String getPassword() {
 		return this.password;
 	}
-		
+	
+	
 	@Column(name = "created_at", nullable = false)
 	private LocalDateTime createdAt = LocalDateTime.now();
-		
+	
+	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonManagedReference 
 	List<Post> posts;
 	
 	@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonManagedReference
 	List<Comment> comments;
 	
 	
