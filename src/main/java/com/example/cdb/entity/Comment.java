@@ -4,6 +4,9 @@ package com.example.cdb.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,29 +30,31 @@ import lombok.NoArgsConstructor;
 public class Comment {
 
 	@Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(nullable = false, columnDefinition = "TEXT")
-  private String content;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String content;
 
-  @Column(name = "created_at", nullable = false)
-  private LocalDateTime createdAt = LocalDateTime.now();
-  
-  @ManyToOne
-  @JoinColumn(name = "post_id", nullable = false)
-  private Post post;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
+    
+    @ManyToOne
+    @JoinColumn(name = "post_id", nullable = false)
+    @JsonBackReference
+    private Post post;
 
-  @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
-  private User user;
-  
-  @ManyToOne
-  @JoinColumn(name="parent_id")
-  private Comment parent;
-  
-  @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-  private List<Comment> replies;
-  
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
+    private User user;
+    
+    @ManyToOne
+    @JoinColumn(name="parent_id")
+    private Comment parent;
+    
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Comment> replies;
+    
 }
-
