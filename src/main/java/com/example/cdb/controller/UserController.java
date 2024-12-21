@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.cdb.entity.User;
 import com.example.cdb.service.UserService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class UserController {
 
