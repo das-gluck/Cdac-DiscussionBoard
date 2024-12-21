@@ -61,9 +61,10 @@ public class SecurityConfig {
 		
 		//http.authorizeHttpRequests().requestMatchers("/page").permitAll().anyRequest().authenticated();
 		
-		http.formLogin(Customizer.withDefaults());
+		http.formLogin().disable();
 		
 		http.httpBasic(Customizer.withDefaults());
+//		http.cors(Customizer.withDefaults());
 		http.csrf(csrf -> csrf.disable());
 		
 		

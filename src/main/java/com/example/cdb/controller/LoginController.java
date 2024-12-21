@@ -2,6 +2,8 @@ package com.example.cdb.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,16 +11,21 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+
+import com.example.cdb.exceptionHandler.ErrorResponse;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 
 
 
 @Controller
+@CrossOrigin
 @RequestMapping("/page")
 public class LoginController {
 	
@@ -32,7 +39,7 @@ public class LoginController {
 	
 	
 	@PostMapping("/login")
-	public RedirectView postMethodName(@RequestParam String email , @RequestParam String password) {
+	public ResponseEntity<String> postMethodName(@RequestParam String email , @RequestParam String password) {
 		
 		try {
 			
@@ -47,19 +54,21 @@ public class LoginController {
 //			
 			String name = authentication.getName();
 			System.out.println("name "+ name);
-			//return ResponseEntity.ok("Login successful"); 
-			return new RedirectView("/api/users");
+			return ResponseEntity.ok("Login successful"); 
+			//return new RedirectView("/api/users");
 			
 			 
 			
 		} catch (BadCredentialsException e) {
-            //return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
 			System.out.println("BAD CREDEn");
-			return new RedirectView("/page/login?error=true");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+			
+			//return new RedirectView("/page/login?error=true");
         } catch (Exception e) {
-            //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
         	System.out.println("EXCEPTION");
-        	return new RedirectView("/page/login?error=true");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+        	
+        	//return new RedirectView("/page/login?error=true");
         }
 		
 		
