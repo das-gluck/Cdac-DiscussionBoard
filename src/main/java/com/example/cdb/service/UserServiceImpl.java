@@ -54,6 +54,9 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	public User updateUser(User user) { 
+		List<Role> roles = List.of( new Role("ROLE_USER", user));
+		user.setRoleList(roles);
+		user.setPassword("{noop}"+user.getPassword());
 		return userRepository.save(user);
 	}
 

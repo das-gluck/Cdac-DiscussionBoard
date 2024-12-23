@@ -54,6 +54,11 @@ public class LoginController {
 //			
 			String name = authentication.getName();
 			System.out.println("name "+ name);
+			System.out.println(authentication.isAuthenticated());
+			System.out.println(authentication.getAuthorities());
+			System.out.println(authentication.getCredentials());
+			
+			
 			return ResponseEntity.ok("Login successful"); 
 			//return new RedirectView("/api/users");
 			
@@ -72,15 +77,6 @@ public class LoginController {
         }
 		
 		
-		
-//		return "Home.html";
-		
-	}
-	
-	@GetMapping("/home")
-	public String homePage() {
-		return "Home.html";
-	}
-	
+	}	
 	
 }
