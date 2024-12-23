@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -31,7 +32,7 @@ public class RegisterController {
 	
 	
 	@PostMapping("/register")
-	public ResponseEntity<String> registerCredential(@ModelAttribute User user) {
+	public ResponseEntity<String> registerCredential(@RequestBody User user) {
 		
 		try {
 			System.out.println(user); 
@@ -42,9 +43,6 @@ public class RegisterController {
 			//return new RedirectView("/page/register?error=true");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
 		}
-		
-		//return ResponseEntity.ok("Login successful");
-		
 	}
 
 }
