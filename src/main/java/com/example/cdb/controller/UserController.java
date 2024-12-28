@@ -29,12 +29,15 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	
 	@PostMapping("/users")
 	public ResponseEntity<User> addUser(@RequestBody User user) {
 		User createdUser = userService.insert(user);
 		return ResponseEntity.ok(createdUser);
 		//return new ResponseEntity<>(createdUser,HttpStatus.CREATED);
 	}
+	
+	
 	
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> getAllUser() {
@@ -48,6 +51,8 @@ public class UserController {
 	    //return new ResponseEntity<>(users,HttpStatus.OK);
 	}
 	
+	
+	
 	@GetMapping("/users/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
 		
@@ -60,6 +65,7 @@ public class UserController {
 		}
 	}
 	
+	
 	@DeleteMapping("/users/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable("id") Long id) {
         Optional<User> user = userService.getUserById(id);
@@ -70,6 +76,8 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + id);
         }
     }
+	
+	
 	
 	@PutMapping("/users")
 	public ResponseEntity<User> updateUser(@RequestBody User user){
