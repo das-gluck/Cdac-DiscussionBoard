@@ -66,21 +66,21 @@ public class LoginController {
 				System.out.println("Entered");
 				String token = jwtService.generateToken(authentication.getName());
 				System.out.println(token);
-			}
-			
-			
-			String name = authentication.getName();
-			System.out.println("name "+ name);
-			System.out.println(authentication.isAuthenticated());
-			System.out.println(authentication.getAuthorities());
-			System.out.println(authentication.getCredentials());
-			
-			
-			return ResponseEntity.ok("Login successful");
+				
+				String name = authentication.getName();
+				System.out.println("name "+ name);
+				System.out.println(authentication.isAuthenticated());
+				System.out.println(authentication.getAuthorities());
+				System.out.println(authentication.getCredentials());
+				
+				return ResponseEntity.ok("Login successful. Token: " + token);
+			}else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+            }
+
+			//return ResponseEntity.ok("Login successful");
 			//return new RedirectView("/api/users");
-			
-			 
-			
+				
 		} catch (BadCredentialsException e) {
 			System.out.println("BAD CREDEn");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
