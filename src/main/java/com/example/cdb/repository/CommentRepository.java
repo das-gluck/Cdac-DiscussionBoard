@@ -10,6 +10,6 @@ import com.example.cdb.entity.Comment;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long>{
 	
-	List<Comment> findByPostIdAndParentIsNull(Long postId);
+	List<Comment> findByPostId(Long postId);
 
 }

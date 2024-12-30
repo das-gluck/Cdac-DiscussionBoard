@@ -103,13 +103,13 @@ public class User implements UserDetails{
 	
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	@JsonManagedReference 
+	@JsonManagedReference(value = "user-post")
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY) // Exclude from request body
-	@ToString.Exclude
+	//@ToString.Exclude
 	List<Post> posts;
 	
 	@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	@JsonManagedReference
+	@JsonManagedReference(value = "user-comment")
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY) // Exclude from request body
 	@ToString.Exclude
 	List<Comment> comments;

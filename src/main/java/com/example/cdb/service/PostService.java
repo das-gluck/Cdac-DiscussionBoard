@@ -8,7 +8,10 @@ import com.example.cdb.entity.Post;
 public interface PostService {
 
 	public List<Post> getAllPosts();
-	public Optional<Post> getPostById(Long id);
+	public List<Post> getPostsByUserId(Long userId);
 	public Post savePost(Post post);
+	
+	public void deletePostByPostId(Long postId);
+	public Post updatePost(Post post);
 	
 }
