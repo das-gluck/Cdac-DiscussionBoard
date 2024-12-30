@@ -1,62 +1,99 @@
 package com.example.cdb.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cdb.entity.Comment;
-import com.example.cdb.entity.Post;
 import com.example.cdb.service.CommentService;
-import com.example.cdb.service.PostService;
 
 
 
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3001")  // Allow requests from this origin
-
-
+@CrossOrigin  // Allow requests from this origin
 public class CommentController {
-
 	
-	@Autowired 
+	
+	@Autowired
 	private CommentService commentService;
 	
-	 @Autowired
-	private PostService postService;
+	@GetMapping("/comments")
+	public List<Comment> getAllComments() {
+		return commentService.getAllComments();
+	}
 	
-	@GetMapping("/post/{postId}")
+	@GetMapping("/comments/byPost/{postId}")
 	public List<Comment> getCommentsByPost(@PathVariable("postId") Long postId) {
-		
 		return commentService.getCommentsByPost(postId);
 	}
 	
-	
-	
-	@PostMapping(value = "/comment", consumes = "application/json")
-	public Comment createComment(@RequestBody Comment comment) {
-		
-	    if (comment.getParent() != null && comment.getParent().getId() != null) {
-	        // Ensure the parent comment exists
-	        Comment parent = commentService.findCommentById(comment.getParent().getId());
-	        comment.setParent(parent);
-	    }
-
-	    // Ensure the associated post exists
-	    if (comment.getPost() != null && comment.getPost().getId() != null) {
-	        Post post = postService.getPostById(comment.getPost().getId()).orElseThrow(() -> new IllegalArgumentException("Post not found"));
-	        comment.setPost(post);
-	    }
-
-	    return commentService.saveComment(comment);
+	@GetMapping("/comments/{commentId}")
+	public Optional<Comment> getCommentsById(@PathVariable("commentId") Long commentId) {
+		return commentService.getCommentsById(commentId); 
 	}
+	
+	
+	@PostMapping("/comments")
+	public Comment addComment(@RequestBody Comment comment) {
+		
+		// Validate if the Post and User exist
+//	    if (comment.getPost() == null || comment.getPost().getId() == null) {
+//	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+//	    }
+//
+//	    if (comment.getUser() == null || comment.getUser().getUser_id() == null) {
+//	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+//	    }
+//	    return ResponseEntity.status(HttpStatus.CREATED).body(savedComment);
+//	    
+		return commentService.addComment(comment);
+	}
+	
+	@PostMapping("/comments/replies")
+	public Comment addReply(@RequestBody Comment reply) {
+		
+//		// Validate if the Post, User, and Parent Comment exist
+//	    if (reply.getPost() == null || reply.getPost().getId() == null) {
+//	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+//	    }
+//
+//	    if (reply.getUser() == null || reply.getUser().getUser_id() == null) {
+//	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+//	    }
+//
+//	    if (reply.getParent() == null || reply.getParent().getId() == null) {
+//	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+//	    }
+//	    return ResponseEntity.status(HttpStatus.CREATED).body(savedReply);
+		
+		return commentService.addComment(reply);
+		//return reply;
+		
+	}
+	
+	@PutMapping("/comments")
+	public Comment updateComment(@RequestBody Comment comment) {
+		System.out.println(comment);
+		return commentService.updateComment(comment);
+	}
+	
+	@DeleteMapping("/comments/{commentId}")
+	public String deleteComment(@PathVariable("commentId") Long commentId) {
+		commentService.deleteCommentByCommentId(commentId);
+		return "comment deleted by id : "+ commentId;
+	}
+	
 
 }
