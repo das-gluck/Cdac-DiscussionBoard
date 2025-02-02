@@ -42,6 +42,11 @@ public class PostController {
 		return postService.getPostsByUserId(userId);
 	}
 	
+	@GetMapping("/posts/post/{postId}")
+	public Optional<Post> getPostByPostId(@PathVariable("postId") Long postId){
+		return postService.getPostsByPostId(postId);
+	}
+	
 	@DeleteMapping("/posts/{postId}")
 	public String deletePostById(@PathVariable("postId") Long postId) {
 		postService.deletePostByPostId(postId);
