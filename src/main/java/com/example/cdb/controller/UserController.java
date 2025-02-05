@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cdb.entity.User;
 import com.example.cdb.service.UserService;
+import com.example.cdb.entity.UserDTO;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -89,4 +90,28 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 	}
+	
+	@PostMapping("/users/{userId}/follow/{followId}")
+    public ResponseEntity<Void> followUser(@PathVariable Long userId, @PathVariable Long followId) {
+        userService.followUser(userId, followId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    
+    @PostMapping("/users/{userId}/unfollow/{unfollowId}")
+    public ResponseEntity<Void> unfollowUser(@PathVariable Long userId, @PathVariable Long unfollowId) {
+        userService.unfollowUser(userId, unfollowId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+   
+    @GetMapping("/users/{userId}/followers")
+    public ResponseEntity<List<UserDTO>> getFollowers(@PathVariable Long userId) {
+        return new ResponseEntity<>(userService.getFollowers(userId), HttpStatus.OK);
+    }
+
+    
+    @GetMapping("/users/{userId}/following")
+    public ResponseEntity<List<UserDTO>> getFollowing(@PathVariable Long userId) {
+        return new ResponseEntity<>(userService.getFollowing(userId), HttpStatus.OK);
+    }
 }

@@ -65,6 +65,12 @@ public class SecurityConfig {
 				.requestMatchers(HttpMethod.PUT,"/api/users").hasRole("ADMIN")
 				.requestMatchers(HttpMethod.DELETE,"/api/users/**").hasRole("ADMIN")
 				
+				// Allow authenticated users with USER or ADMIN roles to follow
+		        .requestMatchers(HttpMethod.POST, "/api/users/{userId}/follow/{followId}").hasAnyRole("USER", "ADMIN")
+		        
+		        // Allow authenticated users with USER or ADMIN roles to unfollow
+		        .requestMatchers(HttpMethod.POST, "/api/users/{userId}/unfollow/{unfollowId}").hasAnyRole("USER", "ADMIN")
+				
 				.requestMatchers("/page/login/**").permitAll()
 				.requestMatchers("/page/register/**").permitAll()
 				.requestMatchers("/api/posts/**").permitAll()

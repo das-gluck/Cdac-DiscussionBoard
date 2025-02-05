@@ -22,8 +22,12 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -115,5 +119,47 @@ public class User implements UserDetails{
 	List<Comment> comments;
 	
 	
+	@Transient
+    private int followersCount;
+
+    @Transient
+    private int followingCount;
+
+    // Methods to calculate counts
+    public int getFollowersCount() {
+        return this.followers != null ? this.followers.size() : 0;
+    }
+
+    public int getFollowingCount() {
+        return this.following != null ? this.following.size() : 0;
+    }
+	
+	
+	// Many-to-many relationship with followers (Users following this user)
+    @ManyToMany
+    @JoinTable(
+        name = "user_followers",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "follower_id")
+    )
+    @JsonIgnoreProperties({
+        "mobileNumber", "email", "password","followersCount","followingCount", "followers", "following",
+        "posts", "comments", "roleList", "createdAt", "authorities",
+        "username", "enabled", "accountNonExpired", "credentialsNonExpired", "accountNonLocked"
+    })
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @ToString.Exclude
+    private List<User> followers = new ArrayList<>();  // List of users following this user
+
+    // Many-to-many relationship with users being followed (Users this user is following)
+    @ManyToMany(mappedBy = "followers")
+    @JsonIgnoreProperties({
+        "mobileNumber", "email", "password","followersCount","followingCount", "followers", "following",
+        "posts", "comments", "roleList", "createdAt", "authorities",
+        "username", "enabled", "accountNonExpired", "credentialsNonExpired", "accountNonLocked"
+    })
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @ToString.Exclude
+    private List<User> following = new ArrayList<>();  // List of users this user is following
 	
 }
