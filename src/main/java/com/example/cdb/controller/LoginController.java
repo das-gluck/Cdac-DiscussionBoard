@@ -1,6 +1,10 @@
 package com.example.cdb.controller;
 
 import org.springframework.security.core.Authentication;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,8 +51,8 @@ public class LoginController {
 	
 	
 	@PostMapping("/login")
-	public ResponseEntity<String> postMethodName(@RequestParam String email , @RequestParam String password) {
-		
+	public ResponseEntity<Map<String, Object>> postMethodName(@RequestParam String email , @RequestParam String password) {
+		Map<String, Object> response = new HashMap<>();
 		try {
 			
 //			System.out.println(email);
@@ -73,9 +77,16 @@ public class LoginController {
 				System.out.println(authentication.getAuthorities());
 				System.out.println(authentication.getCredentials());
 				
-				return ResponseEntity.ok("Login successful. Token: " + token);
+				
+		        response.put("token", token);
+		        response.put("roles", authentication.getAuthorities());
+
+		        return ResponseEntity.ok(response);
+				
+				//return ResponseEntity.ok("Login successful. Token: " + token + "ROle: "+ authentication.getAuthorities());
 			}else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+				 response.put("error", "Invalid email or password");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
             }
 
 			//return ResponseEntity.ok("Login successful");
@@ -83,12 +94,14 @@ public class LoginController {
 				
 		} catch (BadCredentialsException e) {
 			System.out.println("BAD CREDEn");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+			response.put("error", "Invalid email or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
 			
 			//return new RedirectView("/page/login?error=true");
         } catch (Exception e) {
         	System.out.println("EXCEPTION "+ e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+        	response.put("error", "An error occurred");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         	
         	//return new RedirectView("/page/login?error=true");
         }
