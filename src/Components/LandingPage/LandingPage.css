@@ -1,0 +1,76 @@
+/* Hero Section */
+.hero-section {
+  background-color: #2e2d79;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+/* Standardizing Image Sizes */
+.hero-image, .invite-image, .hangout-image, .reliable-tech-image {
+  width: 100%;
+  max-width: 600px;
+  min-height: 300px; /* Ensure height doesn't shrink */
+  aspect-ratio: 16/9; /* Keep proper aspect ratio */
+  background-size: contain;  /* Show the full image */
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+}
+
+/* Specific Section Images */
+.hero-image {
+  background-image: url("../assets/aimsg.png");
+}
+
+.invite-image {
+  background-image: url("../assets/Social.png");
+}
+
+.hangout-image {
+  background-image: url("../assets/Frame.png");
+}
+
+.reliable-tech-image {
+  width: 100%;
+  max-width: 600px;  /* Limits max width */
+  min-height: 300px;
+  aspect-ratio: 16/9;  /* Keeps proper aspect ratio */
+  background-image: url("../assets/section.png");
+  background-size: contain;  /* Shows full image */
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  margin: 0 auto; /* Centers image horizontally */
+}
+
+
+/* Responsive Layout */
+@media (max-width: 1024px) {
+  .hero-section, .p-10 {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .hero-image, .invite-image, .hangout-image, .reliable-tech-image {
+      max-width: 100%;
+      height: auto;
+      min-height: 250px;
+  }
+
+  .text-left {
+      text-align: center;
+  }
+}
+
+/* Footer */
+footer {
+  width: 100%;
+  text-align: center;
+  background-color: #1f2937;
+  color: white;
+  padding: 20px;
+}

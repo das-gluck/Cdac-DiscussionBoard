@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+/* DashBoard Components Layout */
+.dashboard-container{
+    display: flex;
+    column-gap: 40px;
+    margin-left: 250px;
+    margin-top: -320px;
+}
+/* DataBoard Components Layout */
+.data-board-container{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    gap: 10px;
+    padding-top: 2%;
+    align-items: center;
+    height: 15%;
+    width: 80%;
+}
+.total-users-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height:60%;
+    width: 25%;
+    padding: 20px; /* Add padding for spacing */
+    background-color: white; /* Light blue background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    font-size: 18px; /* Increase font size */
+    font-weight: bold; /* Bold text */
+    color: #333; /* Dark text color */
+    text-align: center; /* Center-align text */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+.total-users-container:hover{
+    background-color: #007bff; /* Change background on hover */
+    color: #fff; /* Change text color on hover */
+    transform: scale(1.03); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+.total-posts-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:60%;
+    width: 25%;
+    padding: 20px; /* Add padding for spacing */
+    background-color: white; /* Light blue background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    font-size: 18px; /* Increase font size */
+    font-weight: bold; /* Bold text */
+    color: #333; /* Dark text color */
+    text-align: center; /* Center-align text */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+.total-posts-container:hover{
+    background-color: #007bff; /* Change background on hover */
+    color: #fff; /* Change text color on hover */
+    transform: scale(1.03); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+.total-comments-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:60%;
+    width: 25%;
+    padding: 20px; /* Add padding for spacing */
+    background-color: white; /* Light blue background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    font-size: 18px; /* Increase font size */
+    font-weight: bold; /* Bold text */
+    color: #333; /* Dark text color */
+    text-align: center; /* Center-align text */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+.total-comments-container:hover{
+    background-color: #007bff; /* Change background on hover */
+    color: #fff; /* Change text color on hover */
+    transform: scale(1.03); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+.reach-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:60%;
+    width: 25%;
+    padding: 20px; /* Add padding for spacing */
+    background-color: white; /* Light blue background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    font-size: 18px; /* Increase font size */
+    font-weight: bold; /* Bold text */
+    color: #333; /* Dark text color */
+    text-align: center; /* Center-align text */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+.reach-container:hover{
+    background-color: #007bff; /* Change background on hover */
+    color: #fff; /* Change text color on hover */
+    transform: scale(1.03); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+.title{
+    font-size: 28px;
+    font-family: 'Noto Sans';
+}
+.count{
+    font-size: 28px;
+}
+/* Graphical Data Components Layout */
+.graph-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    height: 45%;
+    width: 100%;
+}
+.line-chart-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:75%;
+    width: 35%;
+    padding: 20px; /* Add padding for spacing */
+    background-color: white; /* Light blue background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    font-size: 18px; /* Increase font size */
+    font-weight: bold; /* Bold text */
+    color: #333; /* Dark text color */
+    text-align: center; /* Center-align text */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+.line-chart-container:hover{
+    background-color: #007bff; /* Change background on hover */
+    color: #fff; /* Change text color on hover */
+    transform: scale(1.03); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+.line-chart-container-child{
+    display: flex;
+    width: 75%;
+    height: 75%;
+    margin: auto;
+    padding: 20px;
+    padding-bottom: 5%;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    transition: all 0.3s ease;
+}
+.line-chart-container-child:hover{
+    background-color: white;
+    transform: scale(1.02);
+}
+.pie-chart-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:75%;
+    width: 35%;
+    padding: 20px; /* Add padding for spacing */
+    background-color: white; /* Light blue background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    font-size: 18px; /* Increase font size */
+    font-weight: bold; /* Bold text */
+    color: #333; /* Dark text color */
+    text-align: center; /* Center-align text */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+.pie-chart-container:hover{
+    background-color: #007bff; /* Change background on hover */
+    color: #fff; /* Change text color on hover */
+    transform: scale(1.03); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+.pie-chart-container-child{
+    display: flex;
+    width: 75%;
+    height: 75%;
+    margin: auto;
+    padding: 20px;
+    padding-bottom: 5%;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    transition: all 0.3s ease;
+}
+.pie-chart-container-child:hover{
+    background-color: white;
+    transform: scale(1.02);
+}
+/* Post Data Component Layout */
+.data-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+    width: 100%;
+}
+.charts-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+    margin-top: 50px;
+}

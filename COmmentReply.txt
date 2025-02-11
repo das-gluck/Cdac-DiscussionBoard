@@ -1,0 +1,57 @@
+gaurav verma
+9:36 PM
+{
+    "content": "THIS is the THIRD comment 2 by user 1 on post 2",
+    "post": {
+        "id": 2
+    },
+    "user": {
+        "user_id": 1
+    },
+    "parent": null
+}
+gaurav verma
+9:41 PM
+{
+    "question": "What is JSON serialization?",
+    "content": "JSON serialization converts Java objects into JSON format.",
+    "user": {
+        "id": 1
+    }
+}
+gaurav verma
+10:07 PM
+{
+    "content": "THIS is the THIRD comment 2 by user 1 on post 2",
+    "post": {
+        "id": 2
+    },
+    "user": {
+        "user_id": 1
+    },
+    "parent": null
+}
+gaurav verma
+10:10 PM
+{
+    "content": "Great! Could you explain more about Spring Boot's autoconfiguration?",
+    "post": {
+        "id": 1
+    },
+    "user": {
+        "user_id": 2
+    },
+    "parent": {
+        "id": 1
+    }
+}
+
+
+
+
+https://www.youtube.com/watch?v=hp03zvnAMHU
+
+
+
+
+https://www.youtube.com/watch?v=hp03zvnAMHU

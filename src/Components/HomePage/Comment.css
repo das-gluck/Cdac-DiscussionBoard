@@ -1,0 +1,54 @@
+/* Comment Component Styles */
+.comment-item {
+    list-style: none;
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 3px solid #007bff;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.comment-item:hover {
+    background-color: #eef4ff;
+}
+
+.action-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.action-btn:hover {
+    background-color: #0056b3;
+}
+
+.comment-input {
+    width: 80%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    outline: none;
+    transition: border 0.3s ease-in-out;
+}
+
+.comment-input:focus {
+    border: 1px solid #007bff;
+}
+
+.comment-list {
+    padding-left: 20px;
+}
+
+/* Nested Comments */
+.comment-item .comment-list {
+    margin-top: 10px;
+    padding-left: 15px;
+    border-left: 2px solid #ddd;
+}
